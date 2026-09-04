@@ -1,6 +1,6 @@
 {{INSTRUCTIONS ABOUT THE USE OF THIS TEMPLATE: All editorial instructions are enclosed in {{double curly braces}} and MUST be either removed from or replaced in the specification document. All other text MUST be included in the specification document. NOTE: As of 2026, ToIP specifications are required to use [Spec-Up-T](https://trustoverip.github.io/spec-up-t-website/). It will automatically generate a table of contents for the entire specification document.}}
 
-# Decentralized Trust Graph Verfiable Data Structures
+# Decentralized Trust Graph Verifiable Data Structures
 
 _Version:_ 1.0
 _Document Status:_ {{MUST be one of: Working Draft, Working Group Approved Deliverable, ToIP Approved Deliverable}}  
