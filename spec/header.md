@@ -1,8 +1,8 @@
 {{INSTRUCTIONS ABOUT THE USE OF THIS TEMPLATE: All editorial instructions are enclosed in {{double curly braces}} and MUST be either removed from or replaced in the specification document. All other text MUST be included in the specification document. NOTE: As of 2026, ToIP specifications are required to use [Spec-Up-T](https://trustoverip.github.io/spec-up-t-website/). It will automatically generate a table of contents for the entire specification document.}}
 
-# Decentralized Trust Graph Verfiable Data Structures
+# Decentralized Trust Graph Verifiable Data Structures
 
-_Version:_ 1.0
+_Version:_ {{MUST be in X.X or X.XX format}}
 _Document Status:_ {{MUST be one of: Working Draft, Working Group Approved Deliverable, ToIP Approved Deliverable}}  
 _DOI:_ {{see [this wiki page](https://lf-toip.atlassian.net/wiki/spaces/HOME/pages/767787009/ToIP+Approved+Deliverable+Process#Persistent-DOI-Link) for instructions about how to add a DOI}}
 
