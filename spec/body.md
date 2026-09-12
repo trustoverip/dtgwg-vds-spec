@@ -97,7 +97,9 @@ The proof covers every other member of the card, including `audience`, `challeng
 A vetting card is usable by one vetter, in one session, for a short time. The publisher MUST set:
 - `audience` to the vetter's DID;
 - `challenge` and `domain` to the values the vetter supplied for the session in which the card is presented;
-- `expiresAt` to no later than 15 minutes after `issuedAt`.
+- `expiresAt` to a time after `issuedAt`, no later than the longest window the verifier accepts for the session.
+
+How long that window should be is the publisher's choice within the verifier's limit, not a constant of this specification. What limits replay is that the window is bounded and that the verifier enforces its own bound, rather than any particular duration. Fifteen minutes suits a card presented in a single sitting, and is a reasonable default for software to offer; a session arranged across time zones, or a vetter working through a queue, may warrant longer. A community that wants a ceiling publishes it with the rest of its vetting requirements, and a verifier applies it in check 8 below.
 
 A verifier MUST reject a card unless all of the following hold:
 
@@ -108,6 +110,7 @@ A verifier MUST reject a card unless all of the following hold:
 5. The current time is no earlier than `issuedAt` and no later than `expiresAt`.
 6. `identityCommitment` recomputes from `commitmentSalt` and `claims`, as specified in [Identity Commitment](#identity-commitment).
 7. The card carries none of the content listed in [What a Vetting Card Never Carries](#what-a-vetting-card-never-carries).
+8. The interval between `issuedAt` and `expiresAt` is no longer than the maximum the verifier accepts, under its own policy or that of the community it vets for. A verifier that publishes no maximum applies none.
 
 Together, these checks stop a card from being replayed:
 - to a different vetter, because of `audience`;
@@ -167,7 +170,7 @@ A verifier that finds such content in a card MUST reject the card, and SHOULD NO
 
 *This section is informative.*
 
-1. **Replay.** A card that verified for one vetter would, without binding, be accepted by any other. `audience`, `challenge`, `domain` and a 15-minute validity window confine each card to one vetter, one session and one community. Verifiers need to apply every check in [Binding](#binding).
+1. **Replay.** A card that verified for one vetter would, without binding, be accepted by any other. `audience`, `challenge`, `domain` and a bounded validity window confine each card to one vetter, one session and one community. What matters is that the window is short enough for the risk the verifier is carrying and that the verifier enforces its own maximum, not the particular duration a publisher chose. Verifiers need to apply every check in [Binding](#binding).
 2. **A signature is not liveness.** A valid proof shows that the controller of `publisher` produced the card for this session. It does not show that the person the vetter is looking at is that controller. The vetting session trust task has to supply that check, for example with a code derived from the session that both parties read aloud, and a vetter should not attest without it.
 3. **Self-asserted claims.** Claims in this draft are `selfAsserted`. The proof establishes who made them, not that they are true. Any assurance comes from the vetter's own check against the person and, where used, a document.
 4. **Low-entropy digests.** An unsalted digest of a legal name could be reversed by hashing candidate names until one matched. `identityCommitment` is salted with 32 random bytes per application, and the card digest covers both the salt and the session challenge. Compare the discussion of unsalted digest-valued members in [dtgwg-cred-spec#38](https://github.com/trustoverip/dtgwg-cred-spec/issues/38).
